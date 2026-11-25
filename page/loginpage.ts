@@ -14,7 +14,7 @@ export class Loginpage
         await this.Page.fill(loginlocator.passwordinput,password);
         await this .Page.waitForTimeout(2000);
         await this.Page.click(loginlocator.signinbutton);
-         await this .Page.waitForTimeout(3000);   
+        await this .Page.waitForTimeout(3000);   
     }
 }
 

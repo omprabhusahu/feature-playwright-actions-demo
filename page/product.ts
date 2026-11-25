@@ -1,5 +1,6 @@
 import { productlocator } from "../locators/productlocator";
 import { Page } from "@playwright/test";
+import {cartlocator} from "../locators/cartlocator";   
 
 export class Productdpage
 {
@@ -100,5 +101,61 @@ export class Productdpage
         return prices.map(price=>parseFloat(price.replace("$","")));
     }
     
+    async clickoncartlink()
+    {
+        await this.page.locator(cartlocator.cartlink).click();
+    }
+
+    async get_first_product_details()
+    {
+        const name =await this.page.locator(productlocator.product_name).textContent();
+        const description =await this.page.locator(productlocator.product_description).textContent();
+        const price =await this.page.locator(productlocator.product_price).textContent();
+
+        return {
+
+            name:name?.trim(),
+            description:description?.trim(),
+            price:price?.trim()
+                                            
+        }
+    }
+    async getallproductsdetails()
+    {
+        const allname =await this.page.locator(productlocator.product_name).allTextContents();
+        const alldescription =await this.page.locator(productlocator.product_description).allTextContents();
+        const allprice =await this.page.locator(productlocator.product_price).allTextContents();
+        
+       const allproducts=allname.map((_, i)=>(
+        //array of objects [name,description,price]
+        { 
+              name : allname[i].trim(),
+              description : alldescription[i].trim(),
+              price : allprice[i].trim()
+            
+           
+        }))
+        return allproducts;
+    
+
+    }
+    async getspecificproductdetails(productname: string[])
+    {
+        const allname =await this.page.locator(productlocator.product_name).allTextContents();
+        const alldescription =await this.page.locator(productlocator.product_description).allTextContents();
+        const allprice =await this.page.locator(productlocator.product_price).allTextContents();
+          
+        const allproducts=allname.map((_, i)=>(
+        //array of objects [name,description,price]
+        { 
+              name : allname[i].trim(),
+              description : alldescription[i].trim(),
+              price : allprice[i].trim()
+            
+           
+        }))
+        return allproducts.filter(p=>productname.includes(p.name));
+    }
+
 
 }

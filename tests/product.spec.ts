@@ -5,6 +5,7 @@ import { test, expect } from "@playwright/test"
 import { loginlocator } from "../locators/loginlocator"
 import { productlocator } from "../locators/productlocator"
 import {producttocart} from "../test_data/productdata"
+import {test2} from "../fixture/fixturetest"
 
 test.describe("Product page test",()=>
 {
@@ -66,10 +67,27 @@ test.describe("Product page test",()=>
         const sorted= [... price].sort((a,b)=>a-b);
         expect(price).toEqual(sorted);
     })
-    test("filter product by price high to low",async({page})=>
-    {
-        await productpage.filterbynameHtoL();
-    })
+    // test("filter product by price high to low",async({page})=>
+    // {
+    //     await productpage.filterbynameHtoL();
+    // })
+    // test ("filterbynameAtoZ",async({page})=>
+    // {
+    //     await productpage.filterbynameAtoZ();
+    // })
+    // test ("filterbynameZtoA",async({page})=>
+    // {
+    //     await productpage.filterbynameZtoA();
+    // })              
+    // test ("filterbynameLtoH",async({page})=>
+    // {
+    //     await productpage.filterbynameLtoH();
+    // })
+    // test ("filterbynameHtoL",async({page})=>
+    // {
+    //     await productpage.filterbynameHtoL();
+    // })
+
 
 }) 
    
